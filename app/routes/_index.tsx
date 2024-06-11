@@ -1,4 +1,7 @@
-import type { MetaFunction } from "@remix-run/node";
+import { json,type MetaFunction } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
+
+import VideoListItem from "~/components/VideoListItem";
 
 export const meta: MetaFunction = () => {
   return [
@@ -7,35 +10,64 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+interface Video {
+  id: string;
+  thumbnail: string;
+  title: string;
+}
+
+export const loader = async () => {
+  // Gotta fetch this from the database on production
+  const videos: Video[] = [
+    {
+      id: "abc123",
+      thumbnail: "/favicon.ico",
+      title: "Video 1",
+    },
+    {
+      id: "def456",
+      thumbnail: "/favicon.ico",
+      title: "Video 2",
+    },
+    {
+      id: "abc123",
+      thumbnail: "/favicon.ico",
+      title: "Video 1",
+    },
+    {
+      id: "def456",
+      thumbnail: "/favicon.ico",
+      title: "Video 2",
+    },
+    {
+      id: "abc123",
+      thumbnail: "/favicon.ico",
+      title: "Video 1",
+    },
+    {
+      id: "def456",
+      thumbnail: "/favicon.ico",
+      title: "Video 2",
+    },
+  ];
+
+  return json(videos);
+};
+
 export default function Index() {
+  const videos = useLoaderData<typeof loader>();
+  
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <h1>Welcome to Remix</h1>
-      <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/start/quickstart"
-            rel="noreferrer"
-          >
-            5m Quick Start
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/start/tutorial"
-            rel="noreferrer"
-          >
-            30m Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
-      </ul>
+    <div style={{
+      display: "flex",
+      width: "100%",
+      flexDirection: "column",
+      overflow: "auto",
+      gap: "20px",
+    }}>
+      {videos.map((video) => (
+        <VideoListItem key={video.id} video={video} />
+      ))}
     </div>
   );
 }
