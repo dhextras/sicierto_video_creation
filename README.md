@@ -1,36 +1,12 @@
-# Welcome to Remix!
+# Sicierto Video Creation
 
-- 📖 [Remix docs](https://remix.run/docs)
+A web application that streamlines the process of creating and editing video content using Invideo AI.
 
-## Development
+## Getting Started
 
-Run the dev server:
+1. Clone the repository: `git clone https://github.com/dhextras/sicierto_video_creatio.git`
+2. Open the folder: `cd sicierto_video_creatio`
+3. Install dependencies: `npm install`
+4. Start the development server: `npm run dev`
 
-```shellscript
-npm run dev
-```
-
-## Deployment
-
-First, build your app for production:
-
-```sh
-npm run build
-```
-
-Then run the app in production mode:
-
-```sh
-npm start
-```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-- `build/server`
-- `build/client`
+> You can access the site at `http://localhost:5173`
