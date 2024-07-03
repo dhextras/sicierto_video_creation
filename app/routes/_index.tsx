@@ -1,73 +1,79 @@
-import { json,type MetaFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { ActionFunctionArgs, json, type MetaFunction } from "@remix-run/node";
+import {
+  defer,
+  useActionData,
+  useFetcher,
+  useLoaderData,
+} from "@remix-run/react";
+import { useEffect, useState } from "react";
 
 import VideoListItem from "~/components/VideoListItem";
+import { deleteVideo, getVideos } from "~/db/utils";
+import { Video } from "~/types/db";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
+    { title: "Sicerto" },
     { name: "description", content: "Welcome to Remix!" },
   ];
 };
 
-interface Video {
-  id: string;
-  thumbnail: string;
-  title: string;
-}
-
 export const loader = async () => {
-  // Gotta fetch this from the database on production
-  const videos: Video[] = [
-    {
-      id: "abc123",
-      thumbnail: "/favicon.ico",
-      title: "Video 1",
-    },
-    {
-      id: "def456",
-      thumbnail: "/favicon.ico",
-      title: "Video 2",
-    },
-    {
-      id: "abc123",
-      thumbnail: "/favicon.ico",
-      title: "Video 1",
-    },
-    {
-      id: "def456",
-      thumbnail: "/favicon.ico",
-      title: "Video 2",
-    },
-    {
-      id: "abc123",
-      thumbnail: "/favicon.ico",
-      title: "Video 1",
-    },
-    {
-      id: "def456",
-      thumbnail: "/favicon.ico",
-      title: "Video 2",
-    },
-  ];
+  const videos = await getVideos();
+  return defer({ videos });
+};
 
-  return json(videos);
+export const action = async ({ request }: ActionFunctionArgs) => {
+  const formData = await request.formData();
+
+  const action = formData.get("action");
+  const videoKey = formData.get("key")?.toString();
+
+  if (action === "delete_video" && videoKey) {
+    await deleteVideo(videoKey);
+
+    return json({ success: true });
+  }
 };
 
 export default function Index() {
-  const videos = useLoaderData<typeof loader>();
-  
+  const fetcher = useFetcher();
+  const loaderData = useLoaderData<typeof loader>();
+  const [videos, setVideos] = useState<Video[] | null>(null);
+
+  useEffect(() => {
+    if (loaderData) {
+      setVideos(loaderData.videos);
+    }
+  }, [loaderData]);
+
   return (
-    <div style={{
-      display: "flex",
-      width: "100%",
-      flexDirection: "column",
-      overflow: "auto",
-      gap: "20px",
-    }}>
-      {videos.map((video) => (
-        <VideoListItem key={video.id} video={video} />
-      ))}
+    <div
+      style={{
+        display: "flex",
+        width: "100%",
+        flexDirection: "column",
+        overflow: "auto",
+        gap: "20px",
+      }}
+    >
+      {videos ? (
+        videos.map((video) => (
+          <VideoListItem
+            key={video.id}
+            video={video}
+            onClick={() => {
+              fetcher.submit(
+                { action: "delete_video", key: video.id },
+                { method: "post" }
+              );
+              setVideos(null);
+            }}
+          />
+        ))
+      ) : (
+        <div>Loading videos...</div>
+      )}
     </div>
   );
 }

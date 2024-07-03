@@ -8,6 +8,8 @@ import {
 
 import Header from "~/components/Header";
 
+import "~/styles/root.css";
+
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">

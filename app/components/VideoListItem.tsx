@@ -1,12 +1,13 @@
-import { Link } from "@remix-run/react";
+import { Form, Link } from "@remix-run/react";
+import { Video } from "~/types/db";
 
-interface Video {
-  id: string;
-  thumbnail: string;
-  title: string;
-}
-
-export default function VideoListItem({ video }: { video: Video }) {
+export default function VideoListItem({
+  video,
+  onClick,
+}: {
+  video: Video;
+  onClick: () => void;
+}) {
   return (
     <div
       style={{
@@ -27,7 +28,7 @@ export default function VideoListItem({ video }: { video: Video }) {
           gap: "20px",
         }}
       >
-        <Link to={`/video-viewer/${video.id}`} className="video-link">
+        <Link to={`/videoViewer/${video.id}`} className="video-link">
           <div style={{ display: "flex", alignItems: "center" }}>
             <img src={video.thumbnail} alt={video.title} />
           </div>
@@ -35,9 +36,32 @@ export default function VideoListItem({ video }: { video: Video }) {
         <div>{video.title}</div>
       </div>
       <div style={{ display: "flex", gap: "12px" }}>
-        <button style={{ padding: '10px', backgroundColor: '#007bff', color: 'white', borderRadius: '5px', border: 'none', cursor: 'pointer' }}>Delete</button>
+        <button
+          onClick={onClick}
+          style={{
+            padding: "10px",
+            backgroundColor: "#007bff",
+            color: "white",
+            borderRadius: "5px",
+            border: "none",
+            cursor: "pointer",
+          }}
+        >
+          Delete
+        </button>
         <Link to="/post-video">
-          <button style={{ padding: '10px', backgroundColor: '#007bff', color: 'white', borderRadius: '5px', border: 'none', cursor: 'pointer' }}>Post</button>
+          <button
+            style={{
+              padding: "10px",
+              backgroundColor: "#007bff",
+              color: "white",
+              borderRadius: "5px",
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            Post
+          </button>
         </Link>
       </div>
     </div>

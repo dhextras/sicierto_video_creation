@@ -22,10 +22,12 @@ const ARTICLE_PROMPTS: ArticlePrompt[] = [
 ];
 
 const ArticlesPopup: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+  const [promptText, setPromptText] = useState("");
+  const [popupTitle, setPopupTitle] = useState<string>("Create Prompt");
+  const [generatedArticle, setGenearteArticle] = useState<string | null>(null);
   const [selectedPrompt, setSelectedPrompt] = useState<ArticlePrompt | null>(
     null
   );
-  const [promptText, setPromptText] = useState("");
 
   const handlePromptSelect = (prompt: ArticlePrompt | null) => {
     if (prompt) {
@@ -37,13 +39,19 @@ const ArticlesPopup: React.FC<{ onClose: () => void }> = ({ onClose }) => {
     }
   };
 
+  const handleCreateVideo = () => {
+    console.log(selectedPrompt);
+  };
+
   const handleCreateScript = () => {
     // Implement the logic to send the prompt text to ChatGPT
     // For now, we'll just log a custom response
-    console.log(
-      "Custom Response: This is a sample article generated based on the provided prompt text.",
-      promptText
+    setGenearteArticle(
+      "Custom Response: This is a sample article generated based on the provided prompt text." +
+        "\nUSER PROMPT: " +
+        promptText
     );
+    setPopupTitle("Generate Script");
   };
 
   return (
@@ -79,7 +87,7 @@ const ArticlesPopup: React.FC<{ onClose: () => void }> = ({ onClose }) => {
             alignItems: "center",
           }}
         >
-          <h2>Generate Articles</h2>
+          <h2>{popupTitle}</h2>
           <button
             onClick={onClose}
             style={{
@@ -92,36 +100,53 @@ const ArticlesPopup: React.FC<{ onClose: () => void }> = ({ onClose }) => {
             &times;
           </button>
         </div>
-        <div>
-          <label>Prompt:</label>
-          <select
-            value={selectedPrompt?.id || ""}
-            onChange={(e) =>
-              handlePromptSelect(
-                ARTICLE_PROMPTS.find(
-                  (prompt) => prompt.id === e.target.value
-                ) || null
-              )
-            }
-          >
-            <option value="">Select a prompt</option>
-            {ARTICLE_PROMPTS.map((prompt) => (
-              <option key={prompt.id} value={prompt.id}>
-                {prompt.title}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <textarea
-            value={promptText}
-            onChange={(e) => setPromptText(e.target.value)}
-            style={{ width: "100%", height: "150px" }}
-          />
-          <button onClick={handleCreateScript} style={{ marginTop: "10px" }}>
-            Create Script
-          </button>
-        </div>
+        {!generatedArticle ? (
+          <>
+            <div>
+              <label htmlFor="prompt-select">Prompt:</label>
+              <select
+                id="prompt-select"
+                value={selectedPrompt?.id || ""}
+                onChange={(e) =>
+                  handlePromptSelect(
+                    ARTICLE_PROMPTS.find(
+                      (prompt) => prompt.id === e.target.value
+                    ) || null
+                  )
+                }
+              >
+                <option value="">Select a prompt</option>
+                {ARTICLE_PROMPTS.map((prompt) => (
+                  <option key={prompt.id} value={prompt.id}>
+                    {prompt.title}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div>
+              <textarea
+                value={promptText}
+                onChange={(e) => setPromptText(e.target.value)}
+                style={{ width: "100%", height: "150px" }}
+              />
+              <button
+                onClick={handleCreateScript}
+                style={{ marginTop: "10px" }}
+              >
+                Create Script
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            <div>shit</div>
+            <p>{generatedArticle}</p>
+
+            <button onClick={handleCreateVideo} style={{ marginTop: "10px" }}>
+              Create Video
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
