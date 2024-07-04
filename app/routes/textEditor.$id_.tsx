@@ -1,6 +1,13 @@
 import invariant from "tiny-invariant";
 import { useEffect, useState } from "react";
-import { redirect, useFetcher, useLoaderData, json } from "@remix-run/react";
+import {
+  Form,
+  json,
+  redirect,
+  useFetcher,
+  useLoaderData,
+  useNavigation,
+} from "@remix-run/react";
 
 import { getScript, updateScript } from "~/db/utils";
 
@@ -31,6 +38,7 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
 
 export default function TextEditor() {
   const fetcher = useFetcher();
+  const navigation = useNavigation();
   const [text, setText] = useState("");
   let { generatedScript } = useLoaderData<{
     generatedScript: Script;
@@ -40,20 +48,35 @@ export default function TextEditor() {
     setText(generatedScript.script);
   }, [generatedScript]);
 
-  const handleCreateVideo = () => {
-    fetcher.submit({ action: "update_script", text: text }, { method: "post" });
+  const handleCreateVideo = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    fetcher.submit(event.currentTarget, {
+      method: "post",
+      action: `/textEditor/${generatedScript.id}`,
+    });
   };
 
   return (
-    <div className="flex flex-col w-full">
-      <div>TextEditor</div>
-      <textarea
-        style={{ width: "90%", height: "350px" }}
-        placeholder="Your text will be here soon..."
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-      />
-      <button onClick={handleCreateVideo}>Create Video</button>
+    <div
+      className="flex flex-col items-center h-full"
+      style={{ width: "-webkit-fill-available" }}
+    >
+      <div className="text-2xl mb-4">TextEditor</div>
+      <Form onSubmit={handleCreateVideo} className="w-full">
+        <textarea
+          className="h-96 p-4 border rounded-md w-full"
+          placeholder="Your text will be here soon..."
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        />
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+          type="submit"
+          disabled={navigation.state === "submitting"}
+        >
+          {navigation.state === "submitting" ? "Loading..." : "Create Video"}
+        </button>
+      </Form>
     </div>
   );
 }

@@ -1,14 +1,6 @@
 import invariant from "tiny-invariant";
-import {
-  json,
-  redirect,
-  useFetcher,
-  useLoaderData,
-  useNavigate,
-} from "@remix-run/react";
-
+import { json, redirect, useFetcher, useLoaderData, useNavigate } from "@remix-run/react";
 import { deleteScript, getScript } from "~/db/utils";
-
 import type { Script } from "~/types/db";
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
 
@@ -33,7 +25,6 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
 export default function CreateScriptPopup() {
   const fetcher = useFetcher();
   const navigate = useNavigate();
-
   const { generatedScript } = useLoaderData<{
     generatedScript: Script;
   }>();
@@ -51,35 +42,30 @@ export default function CreateScriptPopup() {
   };
 
   return (
-    <div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        <h2>Edit Script</h2>
-      </div>
-
-      <p>{generatedScript.script}</p>
-      <div className="flex justify-between">
+    <div className="flex flex-col items-center">
+      <h2 className="text-2xl">Edit Script</h2>
+      <p className="mt-4">{generatedScript.script}</p>
+      <div className="flex justify-between mt-4">
         <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           onClick={() => handleCreateVideo(generatedScript.id)}
-          style={{ marginTop: "10px" }}
         >
           Create Video
         </button>
         <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4"
           onClick={() => handleEditScript(generatedScript.id)}
-          style={{ marginTop: "10px" }}
         >
           Edit Script
         </button>
-        <button onClick={handleDeleteScript} style={{ marginTop: "10px" }}>
-          delete Script
+        <button
+          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-4"
+          onClick={handleDeleteScript}
+        >
+          Delete Script
         </button>
       </div>
     </div>
   );
 }
+

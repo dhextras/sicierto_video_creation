@@ -42,9 +42,9 @@ export default function Header() {
           ) : (
             <Link to="/queue">
               <button
+                className="hover:bg-blue-600 bg-blue-500"
                 style={{
                   padding: "10px",
-                  backgroundColor: "#007bff",
                   color: "white",
                   borderRadius: "5px",
                   border: "none",
@@ -57,9 +57,9 @@ export default function Header() {
           )}
           <Link to="/createPrompt">
             <button
+              className="hover:bg-blue-600 bg-blue-500"
               style={{
                 padding: "10px",
-                backgroundColor: "#007bff",
                 color: "white",
                 borderRadius: "5px",
                 border: "none",

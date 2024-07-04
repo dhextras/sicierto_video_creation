@@ -1,4 +1,5 @@
-import { Form, Link } from "@remix-run/react";
+import { Link } from "@remix-run/react";
+
 import { Video } from "~/types/db";
 
 export default function VideoListItem({
@@ -30,7 +31,7 @@ export default function VideoListItem({
       >
         <Link to={`/videoViewer/${video.id}`} className="video-link">
           <div style={{ display: "flex", alignItems: "center" }}>
-            <img src={video.thumbnail} alt={video.title} />
+            <img src={video.thumbnail} alt={video.title} width="100px" />
           </div>
         </Link>
         <div>{video.title}</div>
