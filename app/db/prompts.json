@@ -1,0 +1,12 @@
+[
+  {
+    "id": "1720061449396",
+    "title": "Summarize and Emphasize Sicierto Solution",
+    "prompt": "Take these articles {} then create an article that summarizes the key points of those articles. After that, review the Sicierto.com site and create an article emphasizing why the Sicierto solution will be a better approach."
+  },
+  {
+    "id": "1720061451574",
+    "title": "Summarize and Emphasize other solutions",
+    "prompt": "Another template"
+  }
+]

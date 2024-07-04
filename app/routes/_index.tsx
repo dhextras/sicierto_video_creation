@@ -1,7 +1,5 @@
 import { ActionFunctionArgs, json, type MetaFunction } from "@remix-run/node";
 import {
-  defer,
-  useActionData,
   useFetcher,
   useLoaderData,
 } from "@remix-run/react";
@@ -20,7 +18,7 @@ export const meta: MetaFunction = () => {
 
 export const loader = async () => {
   const videos = await getVideos();
-  return defer({ videos });
+  return json({ videos });
 };
 
 export const action = async ({ request }: ActionFunctionArgs) => {

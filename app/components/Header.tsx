@@ -1,6 +1,5 @@
-import { Link } from "@remix-run/react";
 import { useState } from "react";
-import ArticlesPopup from "./ArticlePopup";
+import { Link } from "@remix-run/react";
 
 export default function Header() {
   const [showPopup, setShowPopup] = useState(false);
@@ -56,23 +55,22 @@ export default function Header() {
               </button>
             </Link>
           )}
-
-          <button
-            onClick={togglePopup}
-            style={{
-              padding: "10px",
-              backgroundColor: "#007bff",
-              color: "white",
-              borderRadius: "5px",
-              border: "none",
-              cursor: "pointer",
-            }}
-          >
-            + Create Video
-          </button>
+          <Link to="/createPrompt">
+            <button
+              style={{
+                padding: "10px",
+                backgroundColor: "#007bff",
+                color: "white",
+                borderRadius: "5px",
+                border: "none",
+                cursor: "pointer",
+              }}
+            >
+              + Create Video
+            </button>
+          </Link>
         </div>
       </header>
-      {showPopup && <ArticlesPopup onClose={togglePopup} />}
     </>
   );
 }

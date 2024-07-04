@@ -3,3 +3,14 @@ export type Video = {
   thumbnail: string;
   title: string;
 };
+
+export type ScriptPrompt = {
+  id: string;
+  title: string;
+  prompt: string;
+};
+
+export type Script = {
+  id: string;
+  script: string;
+};
