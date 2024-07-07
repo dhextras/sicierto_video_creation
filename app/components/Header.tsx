@@ -1,72 +1,47 @@
-import { useState } from "react";
 import { Link } from "@remix-run/react";
 
-export default function Header() {
-  const [showPopup, setShowPopup] = useState(false);
-
-  const togglePopup = () => {
-    setShowPopup(!showPopup);
-  };
-
+export default function Header({
+  navigationState,
+}: {
+  navigationState: boolean;
+}) {
   return (
     <>
-      <header
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          padding: "1rem",
-        }}
-      >
+      <header className="flex justify-between items-center p-4">
         <div>
-          <Link to="/">
-            <img src="/favicon.ico" alt="Sicierto" />
+          <Link to="/" className="inline-flex items-center">
+            <img src="/favicon.ico" alt="Sicierto" className="h-8 w-8" />
           </Link>
         </div>
-        <div style={{ display: "flex", gap: "15px" }}>
+        <div className="flex gap-4">
           {false ? (
-            <Link to="/">
+            <Link to="/" className="inline-flex items-center">
               <button
-                style={{
-                  padding: "10px",
-                  backgroundColor: "#007bff",
-                  color: "white",
-                  borderRadius: "5px",
-                  border: "none",
-                  cursor: "pointer",
-                }}
+                className={`text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md border border-transparent ${
+                  navigationState ? "cursor-not-allowed opacity-50" : ""
+                }`}
               >
-                Home
+                {!navigationState ? "Home" : "Loading..."}
               </button>
             </Link>
           ) : (
-            <Link to="/queue">
+            <Link to="/queue" className="inline-flex items-center">
               <button
-                className="hover:bg-blue-600 bg-blue-500"
-                style={{
-                  padding: "10px",
-                  color: "white",
-                  borderRadius: "5px",
-                  border: "none",
-                  cursor: "pointer",
-                }}
+                className={`text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md border border-transparent ${
+                  navigationState ? "cursor-not-allowed opacity-50" : ""
+                }`}
               >
-                Queue
+                {!navigationState ? "Queue" : "Loading..."}
               </button>
             </Link>
           )}
-          <Link to="/createPrompt">
+          <Link to="/createPrompt" className="inline-flex items-center">
             <button
-              className="hover:bg-blue-600 bg-blue-500"
-              style={{
-                padding: "10px",
-                color: "white",
-                borderRadius: "5px",
-                border: "none",
-                cursor: "pointer",
-              }}
+              className={`text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md border border-transparent ${
+                navigationState ? "cursor-not-allowed opacity-50" : ""
+              }`}
             >
-              + Create Video
+              {!navigationState ? "+ Create Video" : "Loading..."} 
             </button>
           </Link>
         </div>

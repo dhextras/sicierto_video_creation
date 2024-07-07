@@ -24,16 +24,12 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
 export const action = async ({ params, request }: ActionFunctionArgs) => {
   invariant(params.id, "id must be provided");
   const formData = await request.formData();
-  const action = formData.get("action");
 
-  if (action === "update_script") {
-    const currentScript = await getScript(params.id);
-    const promptText = formData.get("text")?.toString() || currentScript.script;
+  const currentScript = await getScript(params.id);
+  const promptText = formData.get("text")?.toString() || currentScript.script;
 
-    await updateScript(params.id, promptText);
-
-    return redirect(`/createVideo/${params.id}`);
-  }
+  await updateScript(params.id, promptText);
+  return redirect(`/createVideo/${params.id}`);
 };
 
 export default function TextEditor() {
@@ -64,6 +60,7 @@ export default function TextEditor() {
       <div className="text-2xl mb-4">TextEditor</div>
       <Form onSubmit={handleCreateVideo} className="w-full">
         <textarea
+          name="text"
           className="h-96 p-4 border rounded-md w-full"
           placeholder="Your text will be here soon..."
           value={text}
@@ -72,9 +69,9 @@ export default function TextEditor() {
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
           type="submit"
-          disabled={navigation.state === "submitting"}
+          disabled={navigation.state !== "idle"}
         >
-          {navigation.state === "submitting" ? "Loading..." : "Create Video"}
+          {navigation.state !== "idle" ? "Loading..." : "Create Video"}
         </button>
       </Form>
     </div>

@@ -50,7 +50,7 @@ export default function VideoListItem({
         >
           Delete
         </button>
-        <Link to="/post-video">
+        <Link to={`/postVideo/${video.id}`}>
           <button
             style={{
               padding: "10px",

@@ -4,6 +4,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useNavigation,
 } from "@remix-run/react";
 
 import Header from "~/components/Header";
@@ -11,6 +12,8 @@ import Header from "~/components/Header";
 import "~/styles/root.css";
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const navigation = useNavigation();
+
   return (
     <html lang="en">
       <head>
@@ -20,7 +23,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <Header />
+        <Header navigationState={navigation.state !== "idle"} />
         <div
           style={{
             border: "2px solid black",

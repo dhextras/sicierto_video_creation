@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "id": "1720349716781",
+    "script": "Custom Response: This is a sample fdsascript generated based on the provided prompt text. instead generating it from chatgpt\n\nUSER PROMPT: Take these articles {} then create an article that summarizes the key points of those articles. After that, review the Sicierto.com site and create an article emphasizing why the Sicierto solution will be a better approach.\n\n\n\nwhat you think about the text editor fantastic isn't it\n\nlets try it one more time shall we \n"
+  },
+  {
+    "id": "1720352941640",
+    "script": "Custom Response: This is a sample script generated based on the provided prompt text. instead generating it from chatgpt\nUSER PROMPT: Take these articles {} then create an article that summarizes the key points of those articles. After that, review the Sicierto.com site and create an article emphasizing why the Sicierto solution will be a better approach."
+  },
+  {
+    "id": "1720355392159",
+    "script": "Custom Response: This is a sample script generated based on the provided prompt text. instead generating it from chatgpt\nUSER PROMPT: "
+  }
+]

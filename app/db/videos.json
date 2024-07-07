@@ -1,37 +1,44 @@
-[
-  {
-    "id": "j9fif",
-    "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
-    "title": "Wandering Cities of the Mind"
-  },
-  {
-    "id": "262jc",
-    "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
-    "title": "The Dream of a Lifetime"
-  },
-  {
-    "id": "g4sm89",
-    "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
-    "title": "The Sunset of Innocence"
-  },
-  {
-    "id": "k3a65k",
-    "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
-    "title": "The Echoes of Memory"
-  },
-  {
-    "id": "02j0ko",
-    "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
-    "title": "The Dance of Shadows"
-  },
-  {
-    "id": "qxkpqo",
-    "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
-    "title": "The Silence of Secrets"
-  },
-  {
-    "id": "mkfrfo",
-    "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
-    "title": "The Silence of Secrets"
-  }
-]
+  [
+    {
+      "id": "j9fif",
+      "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+      "title": "Wandering Cities of the Mind",
+      "file": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    },
+    {
+      "id": "262jc",
+      "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+      "title": "The Dream of a Lifetime",
+      "file": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    },
+    {
+      "id": "g4sm89",
+      "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+      "title": "The Sunset of Innocence",
+      "file": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    },
+    {
+      "id": "k3a65k",
+      "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+      "title": "The Echoes of Memory",
+      "file": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    },
+    {
+      "id": "02j0ko",
+      "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+      "title": "The Dance of Shadows",
+      "file": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    },
+    {
+      "id": "qxkpqo",
+      "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+      "title": "The Silence of Secrets",
+      "file": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    },
+    {
+      "id": "mkfrfo",
+      "thumbnail": "https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg",
+      "title": "The Silence of Secrets",
+      "file": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+    }
+  ]

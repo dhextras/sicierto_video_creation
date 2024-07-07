@@ -19,6 +19,17 @@ export async function getVideos(): Promise<Video[]> {
   return videos as Video[];
 }
 
+export async function getVideo(id: string): Promise<Video> {
+  const videos = await getVideos();
+  const video = videos.find((video) => video.id === id);
+
+  if (!video) {
+    throw redirect("/createPrompt");
+  }
+
+  return video as Video;
+}
+
 export async function deleteVideo(videoId: string): Promise<Video[]> {
   const videos = await getVideos();
   const filteredVideos = videos.filter((video) => video.id !== videoId);
@@ -88,29 +99,13 @@ export async function getPrompts(): Promise<ScriptPrompt[]> {
 // }
 
 //Script related functions
-async function getScripts(): Promise<Script[]> {
+export async function getScripts(): Promise<Script[]> {
   const filePath = "app/db/scripts.json";
   const scripts = await readFile(filePath, "utf8").then((data) =>
     JSON.parse(data)
   );
 
   return scripts as Script[];
-}
-export async function createScript(promptText: string): Promise<Script> {
-  const scripts = await getScripts();
-
-  const newScript = {
-    id: Date.now().toString(),
-    script:
-      "Custom Response: This is a sample script generated based on the provided prompt text. instead generating it from chatgpt" +
-      "\nUSER PROMPT: " +
-      promptText,
-  };
-
-  scripts.push(newScript);
-  await writeFile("app/db/scripts.json", JSON.stringify(scripts, null, 2));
-
-  return newScript as Script;
 }
 
 export async function getScript(id: string): Promise<Script> {

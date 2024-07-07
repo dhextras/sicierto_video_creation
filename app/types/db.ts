@@ -2,6 +2,7 @@ export type Video = {
   id: string;
   thumbnail: string;
   title: string;
+  file: string;
 };
 
 export type ScriptPrompt = {

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { json, redirect, useFetcher, useLoaderData } from "@remix-run/react";
 
-import { createScript, getPrompts } from "~/db/utils";
+import { getPrompts } from "~/db/utils";
+import { createScript } from "~/utils/gpt";
 
 import { ScriptPrompt } from "~/types/db";
 import { ActionFunctionArgs } from "@remix-run/node";
