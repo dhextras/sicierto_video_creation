@@ -27,7 +27,6 @@ export const action: ActionFunction = async ({ request }) => {
     .map((tag) => tag.trim());
 
   const result = await uploadToYouTube({ ...video, title, description, tags });
-  console.log(result, "somethign");
   return json(result);
 };
 

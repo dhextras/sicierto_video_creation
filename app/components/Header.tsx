@@ -1,3 +1,4 @@
+import { useLocation } from "@remix-run/react";
 import { Link } from "@remix-run/react";
 
 export default function Header({
@@ -5,16 +6,19 @@ export default function Header({
 }: {
   navigationState: boolean;
 }) {
+  const location = useLocation();
+  const isQueue = location.pathname === "/queue";
+
   return (
     <>
       <header className="flex justify-between items-center p-4">
         <div>
           <Link to="/" className="inline-flex items-center">
-            <img src="/favicon.ico" alt="Sicierto" className="h-8 w-8" />
+            <img src="/favicon.ico" alt="Sicierto" className="h-20 w-20" />
           </Link>
         </div>
         <div className="flex gap-4">
-          {false ? (
+          {isQueue ? (
             <Link to="/" className="inline-flex items-center">
               <button
                 className={`text-white bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded-md border border-transparent ${
@@ -41,7 +45,7 @@ export default function Header({
                 navigationState ? "cursor-not-allowed opacity-50" : ""
               }`}
             >
-              {!navigationState ? "+ Create Video" : "Loading..."} 
+              {!navigationState ? "+ Create Video" : "Loading..."}
             </button>
           </Link>
         </div>

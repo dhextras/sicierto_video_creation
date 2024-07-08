@@ -1,5 +1,12 @@
 import invariant from "tiny-invariant";
-import { json, redirect, useFetcher, useLoaderData, useNavigate } from "@remix-run/react";
+import {
+  json,
+  redirect,
+  useFetcher,
+  useLoaderData,
+  useNavigate,
+  useNavigation,
+} from "@remix-run/react";
 import { deleteScript, getScript } from "~/db/utils";
 import type { Script } from "~/types/db";
 import type { ActionFunctionArgs, LoaderFunctionArgs } from "@remix-run/node";
@@ -25,6 +32,7 @@ export const action = async ({ params, request }: ActionFunctionArgs) => {
 export default function CreateScriptPopup() {
   const fetcher = useFetcher();
   const navigate = useNavigate();
+  const navigation = useNavigation();
   const { generatedScript } = useLoaderData<{
     generatedScript: Script;
   }>();
@@ -47,19 +55,28 @@ export default function CreateScriptPopup() {
       <p className="mt-4">{generatedScript.script}</p>
       <div className="flex justify-between mt-4">
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ${
+            navigation.state !== "idle" ? "cursor-not-allowed opacity-50" : ""
+          }`}
+          disabled={navigation.state !== "idle"}
           onClick={() => handleCreateVideo(generatedScript.id)}
         >
-          Create Video
+          {navigation.state !== "idle" ? "Loading..." : "Create Video"}
         </button>
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4"
+          className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4 ${
+            navigation.state !== "idle" ? "cursor-not-allowed opacity-50" : ""
+          }`}
+          disabled={navigation.state !== "idle"}
           onClick={() => handleEditScript(generatedScript.id)}
         >
           Edit Script
         </button>
         <button
-          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-4"
+          className={`bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-4 ${
+            navigation.state !== "idle" ? "cursor-not-allowed opacity-50" : ""
+          }`}
+          disabled={navigation.state !== "idle"}
           onClick={handleDeleteScript}
         >
           Delete Script
@@ -68,4 +85,3 @@ export default function CreateScriptPopup() {
     </div>
   );
 }
-

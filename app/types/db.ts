@@ -15,3 +15,9 @@ export type Script = {
   id: string;
   script: string;
 };
+
+export type PendingVideo = {
+  id: string;
+  currentStep: string;
+  progress: number;
+};

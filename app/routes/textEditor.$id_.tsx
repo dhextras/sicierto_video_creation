@@ -67,9 +67,11 @@ export default function TextEditor() {
           onChange={(e) => setText(e.target.value)}
         />
         <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
-          type="submit"
+          className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 ${
+            navigation.state !== "idle" ? "cursor-not-allowed opacity-50" : ""
+          }`}
           disabled={navigation.state !== "idle"}
+          type="submit"
         >
           {navigation.state !== "idle" ? "Loading..." : "Create Video"}
         </button>
